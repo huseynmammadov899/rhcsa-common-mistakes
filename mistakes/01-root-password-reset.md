@@ -30,6 +30,28 @@ exit
 The first boot after this takes longer while SELinux relabels the file system. That's expected,
 **don't interrupt it**.
 
+## ❌ The typo version of the same mistake
+
+Students remember the step but swap the dot and the slash. The file must be called `.autorelabel`
+(a hidden file) and it must be in `/` (the root of the file system):
+
+| Typed | What it actually creates | Relabel? |
+|-------|--------------------------|----------|
+| `touch /.autorelabel` | `/.autorelabel` ✅ | yes |
+| `touch ./autorelabel` | `autorelabel` (no dot) in the current directory | ❌ no |
+| `touch /autorelabel` | `/autorelabel` (no dot) | ❌ no |
+| `touch .autorelabel` | `.autorelabel` in the **current** directory, only right if you're in `/` | ⚠️ maybe |
+| `touch /sysroot/.autorelabel` | correct **only before** `chroot`; inside chroot it creates `/sysroot/sysroot/...`, which fails or misses | ⚠️ |
+
+No error message appears in any of these cases: `touch` happily creates whatever you typed. So
+**check before you exit**:
+
+```bash
+ls -la /.autorelabel        # must exist, and must be exactly this path
+```
+
+Read it as "slash, then dot": `/` + `.autorelabel`.
+
 ## 🔍 Verify
 
 ```bash

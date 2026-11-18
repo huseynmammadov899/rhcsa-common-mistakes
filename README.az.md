@@ -25,7 +25,7 @@ var. Onu təcrübə VM-ində işlədib *"indi işləyir, reboot-dan sonra yoxdur
 
 | # | Mövzu | Bir sətirdə səhv |
 |---|-------|------------------|
-| 1 | [Root parolunun bərpası](mistakes/az/01-root-password-reset.md) | SELinux relabel unudulur → heç kim login ola bilmir |
+| 1 | [Root parolunun bərpası](mistakes/az/01-root-password-reset.md) | `/.autorelabel` unudulur (və ya `./autorelabel` yazılır) → heç kim login ola bilmir |
 | 2 | [Persistence](mistakes/az/02-persistence.md) | `enable` olmadan `start`, yalnız runtime dəyişikliklər |
 | 3 | [/etc/fstab](mistakes/az/03-fstab.md) | Bir hərf səhvi sistemi emergency mode-a salır |
 | 4 | [LVM ölçüsünün dəyişməsi](mistakes/az/04-lvm.md) | LV böyüyür, file system yox |

@@ -25,7 +25,7 @@ on a practice VM to find *"works now, gone after reboot"* problems.
 
 | # | Topic | The mistake in one line |
 |---|-------|-------------------------|
-| 1 | [Root password reset](mistakes/01-root-password-reset.md) | Forgetting SELinux relabel → nobody can log in |
+| 1 | [Root password reset](mistakes/01-root-password-reset.md) | Forgetting `/.autorelabel` (or typing `./autorelabel`) → nobody can log in |
 | 2 | [Persistence](mistakes/02-persistence.md) | `start` without `enable`, runtime-only changes |
 | 3 | [/etc/fstab](mistakes/03-fstab.md) | A typo that drops the system into emergency mode |
 | 4 | [LVM resizing](mistakes/04-lvm.md) | Growing the LV but not the file system |

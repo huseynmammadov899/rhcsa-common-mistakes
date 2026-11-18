@@ -31,6 +31,27 @@ exit
 Bundan sonrakı ilk boot uzun çəkir, çünki SELinux file system-i yenidən label-ləyir. Bu normaldır,
 **prosesi kəsmə**.
 
+## ❌ Eyni səhvin hərf səhvi versiyası
+
+Tələbələr addımı xatırlayır, amma nöqtə ilə slash-ın yerini qarışdırır. Faylın adı `.autorelabel`
+olmalıdır (gizli fayl) və o, `/`-də (file system-in kökündə) olmalıdır:
+
+| Yazılan | Əslində nə yaradır | Relabel olur? |
+|---------|--------------------|---------------|
+| `touch /.autorelabel` | `/.autorelabel` ✅ | hə |
+| `touch ./autorelabel` | hazırkı qovluqda `autorelabel` (nöqtəsiz) | ❌ yox |
+| `touch /autorelabel` | `/autorelabel` (nöqtəsiz) | ❌ yox |
+| `touch .autorelabel` | **hazırkı** qovluqda `.autorelabel`; yalnız `/`-dəsənsə düzdür | ⚠️ ola bilər |
+| `touch /sysroot/.autorelabel` | **yalnız** `chroot`-dan **əvvəl** düzdür; chroot içində `/sysroot/sysroot/...` axtarır, ya xəta verir, ya da yanlış yerə düşür | ⚠️ |
+
+Bu halların heç birində xəta mesajı çıxmır: `touch` nə yazsan, onu yaradır. Ona görə **çıxmazdan əvvəl yoxla**:
+
+```bash
+ls -la /.autorelabel        # mövcud olmalıdır və path dəqiq belə olmalıdır
+```
+
+Belə yadda saxla: "əvvəl slash, sonra nöqtə", yəni `/` + `.autorelabel`.
+
 ## 🔍 Yoxla
 
 ```bash
