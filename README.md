@@ -17,7 +17,7 @@ There is also a read-only [`rhcsa-sanity-check.sh`](scripts/rhcsa-sanity-check.s
 on a practice VM to find *"works now, gone after reboot"* problems.
 
 > Based on the **public** EX200 objectives and my own mentoring experience. It contains no exam
-> questions. Red Hat exams are under NDA, and this repo respects that.
+> questions.
 
 ---
 

@@ -17,7 +17,7 @@ Bundan əlavə, heç nəyi dəyişməyən [`rhcsa-sanity-check.sh`](scripts/rhcs
 var. Onu təcrübə VM-ində işlədib *"indi işləyir, reboot-dan sonra yoxdur"* problemlərini tapa bilərsən.
 
 > Bu material EX200-ün **public** mövzu siyahısına və mənim mentorluq təcrübəmə əsaslanır.
-> İçində imtahan sualı yoxdur. Red Hat imtahanları NDA altındadır və bu repo buna hörmət edir.
+> İçində imtahan sualı yoxdur.
 
 ---
 
