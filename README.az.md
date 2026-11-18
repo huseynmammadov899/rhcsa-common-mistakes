@@ -66,7 +66,7 @@ sonra düzgün yolla düzəlt. Ondan sonra imtahanda o səhvi etməyəcəksən.
 ## Müəllif
 
 **Hüseyn Məmmədov**, Linux/DevOps Engineer (RHCSA), Ingress Academy-də mentor.
-[LinkedIn](https://www.linkedin.com/in/huseynmemmedov/) · [Credly](https://www.credly.com/users/hsmammadov/)
+[LinkedIn](https://www.linkedin.com/in/huseynmemmedov/)
 
 ## Lisenziya
 

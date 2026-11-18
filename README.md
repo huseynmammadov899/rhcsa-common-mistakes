@@ -66,7 +66,7 @@ break, then fix it the right way. After that you won't make it in the exam.
 ## Author
 
 **Huseyn Mammadov**, Linux/DevOps Engineer (RHCSA) and mentor at Ingress Academy.
-[LinkedIn](https://www.linkedin.com/in/huseynmemmedov/) · [Credly](https://www.credly.com/users/hsmammadov/)
+[LinkedIn](https://www.linkedin.com/in/huseynmemmedov/)
 
 ## License
 
