@@ -33,7 +33,7 @@ on a practice VM to find *"works now, gone after reboot"* problems.
 | 6 | [Users and groups](mistakes/06-users-groups.md) | `usermod -G` silently removes other groups |
 | 7 | [Shared directories](mistakes/07-shared-directories.md) | Missing setgid bit and default ACLs |
 | 8 | [Firewall + SELinux ports](mistakes/08-firewall-ports.md) | Opening the port in only one of the two |
-| 9 | [Networking with nmcli](mistakes/09-networking.md) | Address set, but method still `auto` |
+| 9 | [Networking with nmcli](mistakes/09-networking.md) | Wrong NIC edited in nmtui; address set but method still `auto` |
 | 10 | [Rootless containers as services](mistakes/10-rootless-containers.md) | `su -` to the user and no linger |
 
 Plus [exam-day habits](mistakes/exam-habits.md) that prevent most of these.

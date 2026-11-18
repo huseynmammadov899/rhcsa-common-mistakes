@@ -34,6 +34,47 @@ hostnamectl set-hostname server1.example.com
 > ⚠️ İmtahanda qoşulduğun interface-in IP-sini dəyişmək sessiyanı kəsə bilər.
 > Task-ı iki dəfə oxu və ünvanı diqqətlə yaz.
 
+## ❌ İki NIC: səhv olanı dəyişmək
+
+Tələbə `nmtui`-də iki sətir görür, məsələn `Wired connection 1` və `System eth1`. Birini
+təxminən seçir və ünvanı orada qurur. Hər şey "problemsiz saxlanılır", amma ünvan **səhv
+interface-ə** düşür, ya da ümumiyyətlə aktiv olmayan profilə yazılır.
+
+Niyə çaşdırıcıdır:
+
+- `nmtui` device-ları yox, **connection-ları (profilləri)** göstərir. Profilin adı device adı ilə eyni olmaya bilər.
+- Heç bir device-a bağlı olmayan profil, ya da eyni device üçün iki profil ola bilər.
+- Task profil adını yox, **interface**-i (`eth1`, `ens224`) və ya mövcud IP-ni deyir.
+
+**Heç nəyə toxunmazdan əvvəl düzgün olanı tap:**
+
+```bash
+ip -br addr                              # device-lar, vəziyyət, hazırkı IP-lər
+nmcli device status                      # DEVICE → CONNECTION uyğunluğu  ← əsas komanda
+nmcli -f NAME,UUID,DEVICE,ACTIVE con show
+nmcli -g connection.interface-name con show "Wired connection 1"   # profil hansı device-a bağlıdır
+```
+
+`nmcli device status` nümunəsi:
+
+```
+DEVICE  TYPE      STATE      CONNECTION
+eth0    ethernet  connected  System eth0          ← sən bunun üzərindən qoşulmusan, toxunma
+eth1    ethernet  connected  Wired connection 1   ← task eth1 deyir → BU profili dəyiş
+```
+
+Sonra məhz həmin profili adı ilə dəyiş:
+
+```bash
+nmcli con mod "Wired connection 1" ipv4.addresses ... ipv4.method manual
+nmcli con up "Wired connection 1"
+```
+
+`nmtui`-də **Edit a connection** bölməsini aç və nəyisə dəyişməzdən əvvəl profilin yuxarısındakı
+**Device** sahəsini yoxla.
+
+**Ünvanın düzgün device-a düşdüyünü yoxla:** `ip -br addr show eth1`.
+
 ## 🔍 Yoxla
 
 ```bash

@@ -126,6 +126,16 @@ if have nmcli; then
       warn "'$name' has static address $addrs but ipv4.method=auto (meant manual?)"
     fi
   done < <(nmcli -t -f NAME,DEVICE con show --active)
+  echo "  device → connection (make sure you edited the profile of the right NIC):"
+  nmcli -f DEVICE,STATE,CONNECTION device status | grep -vE '^(lo|virbr|podman|veth)' | sed 's/^/        /'
+  echo "  IPv4 per device:"
+  ip -br -4 addr | grep -v '^lo' | sed 's/^/        /'
+  # profiles that are not active anywhere: a static IP put here goes nowhere
+  while IFS=: read -r name dev; do
+    [[ -n "$dev" ]] && continue
+    a=$(nmcli -g ipv4.addresses con show "$name" 2>/dev/null)
+    [[ -n "$a" ]] && warn "inactive profile '$name' has address $a: was it meant for an active NIC?"
+  done < <(nmcli -t -f NAME,DEVICE con show)
 fi
 static=$(cat /etc/hostname 2>/dev/null); now=$(hostname)
 [[ "$static" == "$now" ]] && ok "hostname '$now' is persistent" || fail "hostname is '$now' but static is '$static' (use hostnamectl)"

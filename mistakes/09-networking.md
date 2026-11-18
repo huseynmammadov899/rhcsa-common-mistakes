@@ -34,6 +34,47 @@ hostnamectl set-hostname server1.example.com
 > ⚠️ On the exam, changing the IP of the interface you're connected through can cut your session.
 > Read the task twice and type the address carefully.
 
+## ❌ Two NICs: editing the wrong one
+
+In `nmtui` the student sees two entries, for example `Wired connection 1` and `System eth1`,
+picks one by guess, and configures the address there. Everything "saves fine", but the
+address ends up on the **wrong interface**, or on a profile that isn't even active.
+
+Why it's confusing:
+
+- `nmtui` lists **connections (profiles)**, not devices. A profile name doesn't have to match the device name.
+- There can be a profile that isn't attached to any device, or two profiles for the same device.
+- The task names an **interface** (`eth1`, `ens224`) or an existing IP, not a profile name.
+
+**Find the right one before you touch anything:**
+
+```bash
+ip -br addr                              # devices, state, current IPs
+nmcli device status                      # DEVICE → CONNECTION mapping  ← the key command
+nmcli -f NAME,UUID,DEVICE,ACTIVE con show
+nmcli -g connection.interface-name con show "Wired connection 1"   # which device a profile is bound to
+```
+
+Example `nmcli device status`:
+
+```
+DEVICE  TYPE      STATE      CONNECTION
+eth0    ethernet  connected  System eth0          ← the one you're logged in through, don't touch
+eth1    ethernet  connected  Wired connection 1   ← the task says eth1 → edit THIS profile
+```
+
+Then edit exactly that profile, by name:
+
+```bash
+nmcli con mod "Wired connection 1" ipv4.addresses ... ipv4.method manual
+nmcli con up "Wired connection 1"
+```
+
+In `nmtui`, open **Edit a connection** and check the **Device** field at the top of the profile
+before changing anything.
+
+**Verify the address landed on the right device:** `ip -br addr show eth1`.
+
 ## 🔍 Verify
 
 ```bash

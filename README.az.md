@@ -33,7 +33,7 @@ var. Onu təcrübə VM-ində işlədib *"indi işləyir, reboot-dan sonra yoxdur
 | 6 | [User və group-lar](mistakes/az/06-users-groups.md) | `usermod -G` digər group-ları səssizcə silir |
 | 7 | [Ortaq qovluqlar](mistakes/az/07-shared-directories.md) | setgid bit-i və default ACL yoxdur |
 | 8 | [Firewall + SELinux port-ları](mistakes/az/08-firewall-ports.md) | Port ikisindən yalnız birində açılır |
-| 9 | [nmcli ilə şəbəkə](mistakes/az/09-networking.md) | Ünvan yazılıb, amma method hələ də `auto` |
+| 9 | [nmcli ilə şəbəkə](mistakes/az/09-networking.md) | nmtui-də səhv NIC dəyişdirilir; ünvan yazılıb, amma method hələ də `auto` |
 | 10 | [Service kimi rootless container-lər](mistakes/az/10-rootless-containers.md) | User-ə `su -` ilə keçid və linger yoxdur |
 
 Üstəlik, bu səhvlərin çoxunun qarşısını alan [imtahan günü vərdişləri](mistakes/az/exam-habits.md).
