@@ -97,6 +97,9 @@ cfg=$(awk -F= '/^SELINUX=/{print $2}' /etc/selinux/config 2>/dev/null)
 [[ "$cur" == Enforcing ]] && ok "current mode: Enforcing" || fail "current mode: $cur (should be Enforcing)"
 [[ "$cfg" == enforcing ]] && ok "config file: enforcing" || fail "config file: SELINUX=$cfg (should be enforcing)"
 [[ -e /.autorelabel ]] && warn "/.autorelabel exists → full relabel on next boot (expected after a root password reset)"
+for typo in /autorelabel /root/autorelabel /root/.autorelabel /sysroot/.autorelabel; do
+  [[ -e "$typo" ]] && fail "$typo found: typo of /.autorelabel? It does NOT trigger a relabel (mistake #1)"
+done
 
 if have restorecon; then
   for d in /var/www /srv /web /common /home /etc/shadow; do
